@@ -1,9 +1,9 @@
 package dev.damocles.vertigoes.setup;
 
+import dev.damocles.vertigoes.block.MyosotisBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -27,7 +27,7 @@ public class Registration {
     }
 
     public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(ModSetup.ITEM_GROUP);
-    public static final RegistryObject<Block> MYOSOTIS = BLOCKS.register("myosotis", () -> new FlowerBlock(MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> MYOSOTIS = BLOCKS.register("myosotis", () -> new MyosotisBlock(MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));
     public static final RegistryObject<Item> MYOSOTIS_ITEM = fromBlock(MYOSOTIS);
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
