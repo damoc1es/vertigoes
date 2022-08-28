@@ -1,0 +1,1 @@
+![Vertigoes logo](vertigoes.png)
