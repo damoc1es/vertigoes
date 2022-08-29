@@ -7,5 +7,6 @@ public class RenderLayerRegistration {
     public static void init() {
         RenderType cutout = RenderType.cutout();
         ItemBlockRenderTypes.setRenderLayer(Registration.MYOSOTIS.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(Registration.POTTED_MYOSOTIS.get(), cutout);
     }
 }
