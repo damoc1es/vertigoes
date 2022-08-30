@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:flowers"
+    },
+    "B": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "vertigoes:myosotis",
+    "count": 3
+  }
+}
