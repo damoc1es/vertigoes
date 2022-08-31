@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "vertigoes:myosotis"
+  },
+  "addition": {
+    "item": "minecraft:ender_eye"
+  },
+  "result": {
+    "item": "vertigoes:ender_myosotis"
+  }
+}

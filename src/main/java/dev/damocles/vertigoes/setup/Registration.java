@@ -1,6 +1,7 @@
 package dev.damocles.vertigoes.setup;
 
 import dev.damocles.vertigoes.block.MyosotisBlock;
+import dev.damocles.vertigoes.item.EnderMyosotisItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +33,9 @@ public class Registration {
 
     public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(ModSetup.ITEM_GROUP);
     public static final RegistryObject<Block> MYOSOTIS = BLOCKS.register("myosotis", () -> new MyosotisBlock(MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));
+
     public static final RegistryObject<Item> MYOSOTIS_ITEM = fromBlock(MYOSOTIS);
+    public static final RegistryObject<Item> ENDER_MYOSOTIS = ITEMS.register("ender_myosotis", () -> new EnderMyosotisItem(ITEM_PROPERTIES));
     public static final RegistryObject<FlowerPotBlock> POTTED_MYOSOTIS = BLOCKS.register("potted_myosotis", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MYOSOTIS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
