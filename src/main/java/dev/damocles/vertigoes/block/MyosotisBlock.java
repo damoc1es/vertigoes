@@ -1,5 +1,6 @@
 package dev.damocles.vertigoes.block;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -60,10 +61,10 @@ public class MyosotisBlock extends FlowerBlock {
                 if(dim.contains(":"))
                     dim = dim.substring(dim.indexOf(":")+1);
 
-                tooltip.add(new TextComponent(String.format("(x=%d, y=%d, z=%d) in %s", coordX, coordY, coordZ, dim)));
+                tooltip.add(new TextComponent(String.format("(x=%d, y=%d, z=%d) in %s", coordX, coordY, coordZ, dim)).withStyle(ChatFormatting.GRAY));
             }
         } else {
-            tooltip.add(new TextComponent("Forget me not.."));
+            tooltip.add(new TextComponent("Forget me not..").withStyle(ChatFormatting.GRAY));
         }
     }
 }
