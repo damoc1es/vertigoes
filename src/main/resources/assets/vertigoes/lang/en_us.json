@@ -1,5 +1,8 @@
 {
+  "itemGroup.vertigoes": "Vertigoes",
   "block.vertigoes.myosotis": "Myosotis",
   "item.vertigoes.ender_myosotis": "Ender Myosotis",
-  "itemGroup.vertigoes": "Vertigoes"
+  "item.vertigoes.primal_pearl": "Primal Pearl",
+  "item.vertigoes.plant_pearl": "Primal Pearl",
+  "item.vertigoes.death_pearl": "Primal Pearl"
 }

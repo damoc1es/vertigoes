@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:calcite"
+    },
+    "B": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "vertigoes:primal_pearl"
+  }
+}
