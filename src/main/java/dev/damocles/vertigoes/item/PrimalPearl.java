@@ -26,34 +26,32 @@ public class PrimalPearl extends Item {
         super(properties);
     }
 
-    public static void tryTransformToDeathPearl(Player player, Entity entity) {
-        if(!(entity instanceof Villager))
-            return;
-
+    public static void tryTransformToGeneralPearl(Player player, String progressTag, int requirement, ItemStack replacement) {
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack item = player.getInventory().getItem(i);
 
             if (item.is(Registration.PRIMAL_PEARL.get())) {
                 CompoundTag tags;
 
-                if (item.getTag() != null) { // already has tags
+                if (item.getTag() != null) { // has tags
                     tags = item.getTag();
 
-                    if (tags.contains("vertigoes.deathprogress") && tags.getInt("vertigoes.deathprogress") >= 10) { // should transform
-                        player.getInventory().removeItem(i, 1);
-                        player.getInventory().setItem(i, Registration.DEATH_PEARL.get().getDefaultInstance());
-                    } else { // shouldn't transform, just increase the progress
-                        if (!tags.contains("vertigoes.deathprogress")) { // has tags but not the deathprogress one
-                            tags.putInt("vertigoes.deathprogress", 0);
-                        }
-                        tags.putInt("vertigoes.deathprogress", tags.getInt("vertigoes.deathprogress") + 1);
+                    if(tags.contains(progressTag)) { // has the progress tag
+                        tags.putInt(progressTag, tags.getInt(progressTag) + 1);
+
+                        if(tags.getInt(progressTag) >= requirement) { // requirement met
+                            player.getInventory().setItem(i, replacement);
+                        } else item.setTag(tags);
+                    } else {
+                        tags.putInt(progressTag, 1);
+                        item.setTag(tags);
                     }
+
                 } else { // doesn't have any tag
                     tags = new CompoundTag();
-                    tags.putInt("vertigoes.deathprogress", 1);
+                    tags.putInt(progressTag, 1);
+                    item.setTag(tags);
                 }
-
-                item.setTag(tags);
             }
         }
     }
@@ -71,33 +69,13 @@ public class PrimalPearl extends Item {
         }
     }
 
-    // TODO: GENERALIZE TRANSFORMATION FUNCTION
     public static void tryTransformToAnimalPearl(Player player) {
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack item = player.getInventory().getItem(i);
+        tryTransformToGeneralPearl(player, "vertigoes.animalprogress", 10, Registration.ANIMAL_PEARL.get().getDefaultInstance());
+    }
 
-            if (item.is(Registration.PRIMAL_PEARL.get())) {
-                CompoundTag tags;
-
-                if (item.getTag() != null) { // already has tags
-                    tags = item.getTag();
-
-                    if (tags.contains("vertigoes.animalprogress") && tags.getInt("vertigoes.animalprogress") >= 10) { // should transform
-                        player.getInventory().removeItem(i, 1);
-                        player.getInventory().setItem(i, Registration.ANIMAL_PEARL.get().getDefaultInstance());
-                    } else { // shouldn't transform, just increase the progress
-                        if (!tags.contains("vertigoes.animalprogress")) { // has tags but not the deathprogress one
-                            tags.putInt("vertigoes.animalprogress", 0);
-                        }
-                        tags.putInt("vertigoes.animalprogress", tags.getInt("vertigoes.animalprogress") + 1);
-                    }
-                } else { // doesn't have any tag
-                    tags = new CompoundTag();
-                    tags.putInt("vertigoes.animalprogress", 1);
-                }
-
-                item.setTag(tags);
-            }
+    public static void tryTransformToDeathPearl(Player player, Entity entity) {
+        if(entity instanceof Villager) {
+            tryTransformToGeneralPearl(player, "vertigoes.deathprogress", 10, Registration.DEATH_PEARL.get().getDefaultInstance());
         }
     }
 
