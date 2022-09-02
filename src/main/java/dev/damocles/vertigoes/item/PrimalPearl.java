@@ -71,6 +71,36 @@ public class PrimalPearl extends Item {
         }
     }
 
+    // TODO: GENERALIZE TRANSFORMATION FUNCTION
+    public static void tryTransformToAnimalPearl(Player player) {
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack item = player.getInventory().getItem(i);
+
+            if (item.is(Registration.PRIMAL_PEARL.get())) {
+                CompoundTag tags;
+
+                if (item.getTag() != null) { // already has tags
+                    tags = item.getTag();
+
+                    if (tags.contains("vertigoes.animalprogress") && tags.getInt("vertigoes.animalprogress") >= 10) { // should transform
+                        player.getInventory().removeItem(i, 1);
+                        player.getInventory().setItem(i, Registration.ANIMAL_PEARL.get().getDefaultInstance());
+                    } else { // shouldn't transform, just increase the progress
+                        if (!tags.contains("vertigoes.animalprogress")) { // has tags but not the deathprogress one
+                            tags.putInt("vertigoes.animalprogress", 0);
+                        }
+                        tags.putInt("vertigoes.animalprogress", tags.getInt("vertigoes.animalprogress") + 1);
+                    }
+                } else { // doesn't have any tag
+                    tags = new CompoundTag();
+                    tags.putInt("vertigoes.animalprogress", 1);
+                }
+
+                item.setTag(tags);
+            }
+        }
+    }
+
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
         tooltipComponents.add(new TextComponent("Immaculate").withStyle(ChatFormatting.GRAY));
     }

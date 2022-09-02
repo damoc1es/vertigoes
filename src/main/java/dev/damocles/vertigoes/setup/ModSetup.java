@@ -4,6 +4,7 @@ import dev.damocles.vertigoes.item.PrimalPearl;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -30,6 +31,12 @@ public class ModSetup {
             if(e.getEntity() instanceof Player) {
                 PrimalPearl.tryTransformToPlantPearl((Player) e.getEntity(), e.getSource());
             }
+        });
+
+        bus.addListener((BabyEntitySpawnEvent e) -> {
+           if(e.getCausedByPlayer() != null) {
+               PrimalPearl.tryTransformToAnimalPearl(e.getCausedByPlayer());
+           }
         });
     }
 

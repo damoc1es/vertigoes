@@ -1,10 +1,7 @@
 package dev.damocles.vertigoes.setup;
 
 import dev.damocles.vertigoes.block.MyosotisBlock;
-import dev.damocles.vertigoes.item.DeathPearl;
-import dev.damocles.vertigoes.item.EnderMyosotisItem;
-import dev.damocles.vertigoes.item.PlantPearl;
-import dev.damocles.vertigoes.item.PrimalPearl;
+import dev.damocles.vertigoes.item.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -39,9 +36,12 @@ public class Registration {
 
     public static final RegistryObject<Item> MYOSOTIS_ITEM = fromBlock(MYOSOTIS);
     public static final RegistryObject<Item> ENDER_MYOSOTIS = ITEMS.register("ender_myosotis", () -> new EnderMyosotisItem(ITEM_PROPERTIES));
+
     public static final RegistryObject<Item> PRIMAL_PEARL = ITEMS.register("primal_pearl", () -> new PrimalPearl(ITEM_PROPERTIES.stacksTo(1)));
-    public static final RegistryObject<Item> DEATH_PEARL = ITEMS.register("death_pearl", () -> new DeathPearl(ITEM_PROPERTIES.stacksTo(1)));
     public static final RegistryObject<Item> PLANT_PEARL = ITEMS.register("plant_pearl", () -> new PlantPearl(ITEM_PROPERTIES.stacksTo(1)));
+    public static final RegistryObject<Item> ANIMAL_PEARL = ITEMS.register("animal_pearl", () -> new AnimalPearl(ITEM_PROPERTIES.stacksTo(1)));
+    public static final RegistryObject<Item> DEATH_PEARL = ITEMS.register("death_pearl", () -> new DeathPearl(ITEM_PROPERTIES.stacksTo(1)));
+
     public static final RegistryObject<FlowerPotBlock> POTTED_MYOSOTIS = BLOCKS.register("potted_myosotis", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MYOSOTIS, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
