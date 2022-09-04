@@ -1,10 +1,14 @@
 package dev.damocles.vertigoes.setup;
 
+import dev.damocles.vertigoes.item.AnimalPearl;
 import dev.damocles.vertigoes.item.PrimalPearl;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -26,6 +30,9 @@ public class ModSetup {
         IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener((LivingDeathEvent e) -> {
             if(e.getSource().getEntity() instanceof Player) {
+                if(e.getEntityLiving() instanceof Villager || e.getEntityLiving().getType().getCategory() == MobCategory.CREATURE)
+                    AnimalPearl.disablePearl((Player)e.getSource().getEntity());
+
                 PrimalPearl.tryTransformToDeathPearl((Player) e.getSource().getEntity(), e.getEntity());
             }
             if(e.getEntity() instanceof Player) {
@@ -37,6 +44,14 @@ public class ModSetup {
            if(e.getCausedByPlayer() != null) {
                PrimalPearl.tryTransformToAnimalPearl(e.getCausedByPlayer());
            }
+        });
+
+        bus.addListener((LivingDamageEvent e) -> {
+            if(e.getSource().getEntity() instanceof Player) {
+                float bonus = AnimalPearl.inHotbarGetUndeadDamage((Player)e.getSource().getEntity(), e.getEntityLiving(), e.getAmount());
+                if(bonus != e.getAmount())
+                    e.setAmount(bonus);
+            }
         });
     }
 
