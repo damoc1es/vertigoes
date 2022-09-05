@@ -4,17 +4,22 @@ import dev.damocles.vertigoes.item.AnimalPearl;
 import dev.damocles.vertigoes.item.DeathPearl;
 import dev.damocles.vertigoes.item.PrimalPearl;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
+import net.minecraftforge.event.entity.living.LivingConversionEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.jetbrains.annotations.NotNull;
 import net.minecraft.world.entity.player.Player;
+
+import java.util.UUID;
 
 import static dev.damocles.vertigoes.setup.Registration.MYOSOTIS;
 
@@ -56,6 +61,17 @@ public class ModSetup {
             if(e.getEntity() instanceof Player) {
                 if(DeathPearl.tryCancelUndeadAttackUponPlayer((Player) e.getEntity(), e.getSource()))
                     e.setCanceled(true);
+            }
+        });
+
+        bus.addListener((LivingConversionEvent.Post e) -> {
+            if (e.getEntityLiving() instanceof ZombieVillager && e.getOutcome() instanceof Villager) {
+                UUID playerID = ObfuscationReflectionHelper.getPrivateValue(ZombieVillager.class, (ZombieVillager)e.getEntityLiving(), "conversionStarter");
+                if(playerID != null) {
+                    Player player = e.getEntityLiving().getLevel().getPlayerByUUID(playerID);
+                    if(player != null)
+                        DeathPearl.disablePearl(player);
+                }
             }
         });
     }
