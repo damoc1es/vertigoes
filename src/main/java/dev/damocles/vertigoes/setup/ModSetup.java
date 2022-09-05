@@ -1,6 +1,7 @@
 package dev.damocles.vertigoes.setup;
 
 import dev.damocles.vertigoes.item.AnimalPearl;
+import dev.damocles.vertigoes.item.DeathPearl;
 import dev.damocles.vertigoes.item.PrimalPearl;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.npc.Villager;
@@ -51,6 +52,10 @@ public class ModSetup {
                 float bonus = AnimalPearl.inHotbarGetUndeadDamage((Player)e.getSource().getEntity(), e.getEntityLiving(), e.getAmount());
                 if(bonus != e.getAmount())
                     e.setAmount(bonus);
+            }
+            if(e.getEntity() instanceof Player) {
+                if(DeathPearl.tryCancelUndeadAttackUponPlayer((Player) e.getEntity(), e.getSource()))
+                    e.setCanceled(true);
             }
         });
     }
