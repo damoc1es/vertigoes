@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
@@ -10,7 +9,7 @@ buildscript {
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
 plugins {
     id 'eclipse'
     id 'maven-publish'
@@ -19,10 +18,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 version = '0.0.1'
-group = 'dev.damocles.vertigoes' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'dev.damocles.vertigoes'
 archivesBaseName = 'vertigoes'
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -45,8 +43,6 @@ minecraft {
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
@@ -144,8 +140,15 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
-    maven { // JEI
-        url "https://dvs1.progwml6.com/files/maven"
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
     }
     maven { // TOP
         url "https://cursemaven.com"
@@ -158,9 +161,8 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.68'
 
-    compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    implementation fg.deobf("mezz.jei:jei-${jei_version}")
-
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
 }
 
@@ -168,12 +170,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "vertigoes",
-                "Specification-Vendor"    : "vertigoessareus",
+                "Specification-Title"     : "${mod_name}",
+                "Specification-Vendor"    : "damoc1es",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "vertigoessareus",
+                "Implementation-Vendor"   : "damoc1es",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
