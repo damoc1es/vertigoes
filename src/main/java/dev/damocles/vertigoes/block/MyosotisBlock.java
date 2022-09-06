@@ -36,9 +36,9 @@ public class MyosotisBlock extends FlowerBlock {
                 // Set tag of drop with the coordinates and dimension of last placement
                 CompoundTag tags = new CompoundTag();
                 tags.putBoolean("vertigoes.wasPlaced", true);
-                tags.putInt("vertigoes.coordX", pos.getX());
-                tags.putInt("vertigoes.coordY", pos.getY());
-                tags.putInt("vertigoes.coordZ", pos.getZ());
+                tags.putDouble("vertigoes.coordX", pos.getX());
+                tags.putDouble("vertigoes.coordY", pos.getY());
+                tags.putDouble("vertigoes.coordZ", pos.getZ());
                 tags.putString("vertigoes.dim", level.dimension().location().toString());
 
                 itemDrop.setTag(tags);
@@ -54,14 +54,14 @@ public class MyosotisBlock extends FlowerBlock {
         if(stack.hasTag() && stack.getTag() != null) {
             CompoundTag currentTags = stack.getTag();
             if(currentTags.contains("vertigoes.wasPlaced") && currentTags.getBoolean("vertigoes.wasPlaced")) { //
-                int coordX = currentTags.getInt("vertigoes.coordX");
-                int coordY = currentTags.getInt("vertigoes.coordY");
-                int coordZ = currentTags.getInt("vertigoes.coordZ");
+                double coordX = currentTags.getDouble("vertigoes.coordX");
+                double coordY = currentTags.getDouble("vertigoes.coordY");
+                double coordZ = currentTags.getDouble("vertigoes.coordZ");
                 String dim = currentTags.getString("vertigoes.dim");
                 if(dim.contains(":"))
                     dim = dim.substring(dim.indexOf(":")+1);
 
-                tooltip.add(new TextComponent(String.format("(x=%d, y=%d, z=%d) in %s", coordX, coordY, coordZ, dim)).withStyle(ChatFormatting.GRAY));
+                tooltip.add(new TextComponent(String.format("(x=%.2f, y=%.2f, z=%.2f) in %s", coordX, coordY, coordZ, dim)).withStyle(ChatFormatting.GRAY));
             }
         } else {
             tooltip.add(new TextComponent("Forget me not..").withStyle(ChatFormatting.GRAY));
