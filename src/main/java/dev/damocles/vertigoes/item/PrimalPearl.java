@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -76,6 +77,12 @@ public class PrimalPearl extends Item {
     public static void tryTransformToDeathPearl(Player player, Entity entity) {
         if(entity instanceof Villager) {
             tryTransformToGeneralPearl(player, "vertigoes.deathprogress", 10, Registration.DEATH_PEARL.get().getDefaultInstance());
+        }
+    }
+
+    public static void tryTransformToAquaticPearl(Player player, Entity entity) {
+        if(entity instanceof Drowned) {
+            tryTransformToGeneralPearl(player, "vertigoes.aquaticprogress", 25, Registration.AQUATIC_PEARL.get().getDefaultInstance());
         }
     }
 

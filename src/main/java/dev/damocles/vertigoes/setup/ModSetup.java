@@ -1,6 +1,7 @@
 package dev.damocles.vertigoes.setup;
 
 import dev.damocles.vertigoes.item.AnimalPearl;
+import dev.damocles.vertigoes.item.AquaticPearl;
 import dev.damocles.vertigoes.item.DeathPearl;
 import dev.damocles.vertigoes.item.PrimalPearl;
 import net.minecraft.world.entity.MobCategory;
@@ -36,10 +37,15 @@ public class ModSetup {
         IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener((LivingDeathEvent e) -> {
             if(e.getSource().getEntity() instanceof Player) {
-                if(e.getEntityLiving() instanceof Villager || e.getEntityLiving().getType().getCategory() == MobCategory.CREATURE)
+                MobCategory killedCategory = e.getEntityLiving().getType().getCategory();
+                if(e.getEntityLiving() instanceof Villager || killedCategory == MobCategory.CREATURE)
                     AnimalPearl.disablePearl((Player)e.getSource().getEntity());
 
+                if(killedCategory == MobCategory.WATER_CREATURE || killedCategory == MobCategory.WATER_AMBIENT)
+                    AquaticPearl.disablePearl((Player)e.getSource().getEntity());
+
                 PrimalPearl.tryTransformToDeathPearl((Player) e.getSource().getEntity(), e.getEntity());
+                PrimalPearl.tryTransformToAquaticPearl((Player) e.getSource().getEntity(), e.getEntity());
             }
             if(e.getEntity() instanceof Player) {
                 PrimalPearl.tryTransformToPlantPearl((Player) e.getEntity(), e.getSource());
@@ -66,12 +72,14 @@ public class ModSetup {
 
         bus.addListener((LivingConversionEvent.Post e) -> {
             if (e.getEntityLiving() instanceof ZombieVillager && e.getOutcome() instanceof Villager) {
-                UUID playerID = ObfuscationReflectionHelper.getPrivateValue(ZombieVillager.class, (ZombieVillager)e.getEntityLiving(), "conversionStarter");
-                if(playerID != null) {
-                    Player player = e.getEntityLiving().getLevel().getPlayerByUUID(playerID);
-                    if(player != null)
-                        DeathPearl.disablePearl(player);
-                }
+                try {
+                    UUID playerID = ObfuscationReflectionHelper.getPrivateValue(ZombieVillager.class, (ZombieVillager) e.getEntityLiving(), "conversionStarter");
+                    if (playerID != null) {
+                        Player player = e.getEntityLiving().getLevel().getPlayerByUUID(playerID);
+                        if (player != null)
+                            DeathPearl.disablePearl(player);
+                    }
+                } catch(ObfuscationReflectionHelper.UnableToAccessFieldException ignored) {}
             }
         });
     }
