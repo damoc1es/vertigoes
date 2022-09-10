@@ -1,5 +1,6 @@
 package dev.damocles.vertigoes.item;
 
+import dev.damocles.vertigoes.datagen.PearlsConfig;
 import dev.damocles.vertigoes.setup.Registration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -43,10 +44,11 @@ public class AquaticPearl extends AbstractElementalPearl {
     }
 
     public static void disablePearl(Player player) {
-        for(int i=0; i<player.getInventory().getContainerSize(); i++) {
-            if(player.getInventory().getItem(i).is(AQUATIC_PEARL.get()))
-                player.getInventory().setItem(i, Registration.PRIMAL_PEARL.get().getDefaultInstance());
-        }
+        if(PearlsConfig.aquaticCanBeDisabled.get())
+            for(int i=0; i<player.getInventory().getContainerSize(); i++) {
+                if(player.getInventory().getItem(i).is(AQUATIC_PEARL.get()))
+                    player.getInventory().setItem(i, Registration.PRIMAL_PEARL.get().getDefaultInstance());
+            }
     }
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {

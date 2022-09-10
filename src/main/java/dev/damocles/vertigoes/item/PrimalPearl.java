@@ -1,5 +1,6 @@
 package dev.damocles.vertigoes.item;
 
+import dev.damocles.vertigoes.datagen.PearlsConfig;
 import dev.damocles.vertigoes.setup.Registration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -71,18 +72,18 @@ public class PrimalPearl extends Item {
     }
 
     public static void tryTransformToAnimalPearl(Player player) {
-        tryTransformToGeneralPearl(player, "vertigoes.animalprogress", 10, Registration.ANIMAL_PEARL.get().getDefaultInstance());
+        tryTransformToGeneralPearl(player, "vertigoes.animalprogress", PearlsConfig.animalRequirement.get(), Registration.ANIMAL_PEARL.get().getDefaultInstance());
     }
 
     public static void tryTransformToDeathPearl(Player player, Entity entity) {
         if(entity instanceof Villager) {
-            tryTransformToGeneralPearl(player, "vertigoes.deathprogress", 10, Registration.DEATH_PEARL.get().getDefaultInstance());
+            tryTransformToGeneralPearl(player, "vertigoes.deathprogress", PearlsConfig.deathRequirement.get(), Registration.DEATH_PEARL.get().getDefaultInstance());
         }
     }
 
     public static void tryTransformToAquaticPearl(Player player, Entity entity) {
         if(entity instanceof Drowned) {
-            tryTransformToGeneralPearl(player, "vertigoes.aquaticprogress", 25, Registration.AQUATIC_PEARL.get().getDefaultInstance());
+            tryTransformToGeneralPearl(player, "vertigoes.aquaticprogress", PearlsConfig.aquaticRequirement.get(), Registration.AQUATIC_PEARL.get().getDefaultInstance());
         }
     }
 
