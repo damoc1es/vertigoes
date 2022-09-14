@@ -47,6 +47,8 @@ public class Registration {
     public static final RegistryObject<Item> DEATH_PEARL = ITEMS.register("death_pearl", () -> new DeathPearl(ITEM_PROPERTIES.stacksTo(1)));
     public static final RegistryObject<Item> AQUATIC_PEARL = ITEMS.register("aquatic_pearl", () -> new AquaticPearl(ITEM_PROPERTIES.stacksTo(1)));
 
+    public static final RegistryObject<Item> UNSTOPPABLE_FORCE = ITEMS.register("unstoppable_force", () -> new UnstoppableForce(ITEM_PROPERTIES.stacksTo(1)));
+
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
     }
