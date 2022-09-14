@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:nether_star"
+    },
+    "A": {
+      "item": "minecraft:poppy"
+    },
+    "I": {
+      "item": "minecraft:cobblestone"
+    },
+    "B": {
+      "item": "vertigoes:myosotis"
+    },
+    "H": {
+      "item": "vertigoes:ender_myosotis"
+    },
+    "C": {
+      "item": "minecraft:ghast_tear"
+    },
+    "G": {
+      "item": "minecraft:blaze_rod"
+    },
+    "D": {
+      "item": "minecraft:elytra"
+    },
+    "F": {
+      "item": "minecraft:dragon_head"
+    }
+  },
+  "result": {
+    "item": "vertigoes:unstoppable_force"
+  }
+}

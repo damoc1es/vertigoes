@@ -55,5 +55,7 @@ public class VertigoesJEIPlugin implements IModPlugin {
                         Turns back into a Primal Pearl if you kill any fish/water friendly creature."""));
         registry.addIngredientInfo(new ItemStack(PLANT_ESSENCE_ITEM.get()), itemType,
                 new TextComponent("Only obtained by using the Plant life Pearl."));
+        registry.addIngredientInfo(new ItemStack(UNSTOPPABLE_FORCE.get()), itemType,
+                new TextComponent("Using it on Bedrock teleports you to The End."));
     }
 }
