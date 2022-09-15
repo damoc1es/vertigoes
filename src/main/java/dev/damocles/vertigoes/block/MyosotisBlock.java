@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static dev.damocles.vertigoes.setup.Registration.PLANT_ESSENCE;
+
 public class MyosotisBlock extends FlowerBlock {
     public MyosotisBlock(MobEffect suspiciousStewEffect, int effectDuration, Properties properties) {
         super(suspiciousStewEffect, effectDuration, properties);
@@ -66,5 +68,10 @@ public class MyosotisBlock extends FlowerBlock {
         } else {
             tooltip.add(new TextComponent("Forget me not..").withStyle(ChatFormatting.GRAY));
         }
+    }
+
+    @Override
+    public boolean mayPlaceOn(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+        return state.is(PLANT_ESSENCE.get()) || super.mayPlaceOn(state, level, pos);
     }
 }
