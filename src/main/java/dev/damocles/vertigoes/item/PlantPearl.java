@@ -20,14 +20,6 @@ public class PlantPearl extends AbstractElementalPearl {
         super(properties, PLANT_ESSENCE_ITEM.get());
     }
 
-    /*@Override
-    public @NotNull InteractionResult useOn(@NotNull UseOnContext context) {
-        BlockHitResult hitResult = new BlockHitResult(context.getClickLocation(), context.getClickedFace(), context.getClickedPos(), context.isInside());
-        BlockPlaceContext newContext = new BlockPlaceContext(context.getLevel(), context.getPlayer(), context.getHand(), PLANT_ESSENCE_ITEM.get().getDefaultInstance(), hitResult);
-
-        return PLANT_ESSENCE_ITEM.get().useOn(newContext);
-    }*/
-
     @Override
     public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
         if(state.is(PLANT_ESSENCE.get()))

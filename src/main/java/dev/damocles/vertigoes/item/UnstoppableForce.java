@@ -10,12 +10,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.minecraft.world.level.Level.END;
+import static net.minecraft.world.level.block.Blocks.BEACON;
 import static net.minecraft.world.level.block.Blocks.BEDROCK;
 
 public class UnstoppableForce extends Item {
@@ -34,6 +36,13 @@ public class UnstoppableForce extends Item {
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
+        if(state.is(BEACON))
+            return 6.0F;
+        return super.getDestroySpeed(stack, state);
     }
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {

@@ -1,5 +1,6 @@
 package dev.damocles.vertigoes.setup;
 
+import dev.damocles.vertigoes.block.GlassHeart;
 import dev.damocles.vertigoes.block.MyosotisBlock;
 import dev.damocles.vertigoes.item.*;
 import net.minecraft.world.item.BlockItem;
@@ -48,6 +49,9 @@ public class Registration {
     public static final RegistryObject<Item> AQUATIC_PEARL = ITEMS.register("aquatic_pearl", () -> new AquaticPearl(ITEM_PROPERTIES.stacksTo(1)));
 
     public static final RegistryObject<Item> UNSTOPPABLE_FORCE = ITEMS.register("unstoppable_force", () -> new UnstoppableForce(ITEM_PROPERTIES.stacksTo(1)));
+
+    public static final RegistryObject<Block> GLASS_HEART = BLOCKS.register("glass_heart", () -> new GlassHeart(BlockBehaviour.Properties.of(Material.PLANT).noCollission().sound(SoundType.GLASS).lightLevel((emission) -> 15)));
+    public static final RegistryObject<Item> GLASS_HEART_ITEM = fromBlock(GLASS_HEART);
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
