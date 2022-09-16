@@ -19,7 +19,6 @@ public class Vertigoes {
     public static final String MODID = "vertigoes";
 
     public Vertigoes() {
-        ModSetup.setup();
         Registration.init();
         VertigoesConfig.setup();
 
