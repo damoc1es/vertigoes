@@ -5,20 +5,20 @@ import dev.damocles.vertigoes.item.AnimalPearl;
 import dev.damocles.vertigoes.item.AquaticPearl;
 import dev.damocles.vertigoes.item.DeathPearl;
 import dev.damocles.vertigoes.item.PrimalPearl;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
-import net.minecraftforge.event.entity.living.LivingConversionEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 import java.util.UUID;
+
+import static dev.damocles.vertigoes.setup.Registration.UNSTOPPABLE_FORCE;
 
 @Mod.EventBusSubscriber(modid = Vertigoes.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class VertigoesEventHandler {
@@ -58,6 +58,16 @@ public class VertigoesEventHandler {
             float bonus = AnimalPearl.inHotbarGetUndeadDamage((Player)event.getSource().getEntity(), event.getEntityLiving(), event.getAmount());
             if(bonus != event.getAmount())
                 event.setAmount(bonus);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPunchingWithForce(LivingKnockBackEvent event) {
+        LivingEntity damaged = event.getEntityLiving();
+        if(damaged.getLastDamageSource() != null && damaged.getLastDamageSource().getEntity() instanceof LivingEntity source) {
+            if(source.getMainHandItem().is(UNSTOPPABLE_FORCE.get()) && event.getStrength() < 2F) {
+                event.setStrength(2F); // equivalent of a Knockback IV enchantment
+            }
         }
     }
 
