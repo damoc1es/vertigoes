@@ -20,6 +20,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import static dev.damocles.vertigoes.setup.Registration.GLASS_HEART_BLOCK_ENTITY;
+
 public class GlassHeart extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -36,8 +38,11 @@ public class GlassHeart extends BaseEntityBlock implements SimpleWaterloggedBloc
         return new GlassHeartBlockEntity(pos, blockState);
     }
 
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityType.CONDUIT, pLevel.isClientSide ? GlassHeartBlockEntity::clientTick : GlassHeartBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+        if(!level.isClientSide()) {
+            return createTickerHelper(blockEntityType, GLASS_HEART_BLOCK_ENTITY.get(), GlassHeartBlockEntity::serverTick);
+        }
+        return null;
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
