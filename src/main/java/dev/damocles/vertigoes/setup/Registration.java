@@ -2,6 +2,7 @@ package dev.damocles.vertigoes.setup;
 
 import dev.damocles.vertigoes.block.GlassHeart;
 import dev.damocles.vertigoes.block.MyosotisBlock;
+import dev.damocles.vertigoes.block.GlassHeartBlockEntity;
 import dev.damocles.vertigoes.item.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.effect.*;
@@ -23,11 +25,13 @@ import static dev.damocles.vertigoes.Vertigoes.MODID;
 public class Registration {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
 
     public static void init() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(bus);
         ITEMS.register(bus);
+        BLOCK_ENTITIES.register(bus);
         FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
         pot.addPlant(MYOSOTIS.getId(), POTTED_MYOSOTIS);
     }
@@ -52,6 +56,7 @@ public class Registration {
 
     public static final RegistryObject<Block> GLASS_HEART = BLOCKS.register("glass_heart", () -> new GlassHeart(BlockBehaviour.Properties.of(Material.PLANT).noCollission().sound(SoundType.GLASS).lightLevel((emission) -> 15)));
     public static final RegistryObject<Item> GLASS_HEART_ITEM = fromBlock(GLASS_HEART);
+    public static final RegistryObject<BlockEntityType<GlassHeartBlockEntity>> GLASS_HEART_BLOCK_ENTITY = BLOCK_ENTITIES.register("glass_heart", () -> BlockEntityType.Builder.of(GlassHeartBlockEntity::new, GLASS_HEART.get()).build(null));
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
