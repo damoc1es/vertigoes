@@ -9,7 +9,7 @@ public class GlassHeartConfig {
 
         glassHeartRadius = builder
                 .comment("The Area of Effect of the Glass Heart (radius)")
-                .defineInRange("glass_heart_radius", 3, 0, 30);
+                .defineInRange("glass_heart_radius", 4, 0, 30);
 
         builder.pop();
     }

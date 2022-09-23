@@ -1,6 +1,11 @@
 package dev.damocles.vertigoes.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -16,11 +21,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import static dev.damocles.vertigoes.setup.Registration.GLASS_HEART_BLOCK_ENTITY;
+import static net.minecraft.world.item.Items.LINGERING_POTION;
 
 public class GlassHeart extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -28,6 +36,25 @@ public class GlassHeart extends BaseEntityBlock implements SimpleWaterloggedBloc
     public GlassHeart(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
+    }
+
+    @Override
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+        if (!level.isClientSide && player.getMainHandItem().is(LINGERING_POTION)) {
+            BlockEntity blockentity = level.getBlockEntity(pos);
+
+            if (blockentity instanceof GlassHeartBlockEntity glassHeart) {
+                List<MobEffectInstance> effects = PotionUtils.getMobEffects(player.getMainHandItem());
+
+                if(!effects.isEmpty() && !effects.get(0).getEffect().isInstantenous()) {
+                    glassHeart.effect = effects.get(0).getEffect();
+                    glassHeart.effectAmplifier = effects.get(0).getAmplifier();
+                    glassHeart.setChanged();
+                    return InteractionResult.SUCCESS;
+                }
+            }
+        }
+        return super.use(state, level, pos, player, hand, hitResult);
     }
 
     public @NotNull FluidState getFluidState(BlockState state) {
