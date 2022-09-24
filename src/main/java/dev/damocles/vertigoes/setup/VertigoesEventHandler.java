@@ -10,7 +10,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +19,7 @@ import java.util.UUID;
 
 import static dev.damocles.vertigoes.setup.Registration.UNSTOPPABLE_FORCE;
 
-@Mod.EventBusSubscriber(modid = Vertigoes.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Vertigoes.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class VertigoesEventHandler {
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
