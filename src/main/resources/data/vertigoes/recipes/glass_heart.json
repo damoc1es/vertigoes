@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "vertigoes:unstoppable_force"
+    },
+    {
+      "item": "minecraft:beacon"
+    }
+  ],
+  "result": {
+    "item": "vertigoes:glass_heart"
+  }
+}

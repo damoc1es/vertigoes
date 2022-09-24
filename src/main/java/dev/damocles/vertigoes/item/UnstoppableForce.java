@@ -39,6 +39,16 @@ public class UnstoppableForce extends Item {
     }
 
     @Override
+    public ItemStack getContainerItem(ItemStack stack) {
+        return stack.copy();
+    }
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
         if(state.is(BEACON))
             return 6.0F;
