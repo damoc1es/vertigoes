@@ -89,5 +89,17 @@ public class PrimalPearl extends Item {
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
         tooltipComponents.add(new TextComponent("Immaculate").withStyle(ChatFormatting.GRAY));
+
+        if(stack.getTag() != null) {
+            CompoundTag tags = stack.getTag();
+            if(tags.contains("vertigoes.animalprogress"))
+                tooltipComponents.add(new TextComponent(String.format("%d / %d Bred animals", tags.getInt("vertigoes.animalprogress"), PearlsConfig.animalRequirement.get())).withStyle(ChatFormatting.RED));
+
+            if(tags.contains("vertigoes.deathprogress"))
+                tooltipComponents.add(new TextComponent(String.format("%d / %d Villagers killed", tags.getInt("vertigoes.deathprogress"), PearlsConfig.deathRequirement.get())).withStyle(ChatFormatting.DARK_GRAY));
+
+            if(tags.contains("vertigoes.aquaticprogress"))
+                tooltipComponents.add(new TextComponent(String.format("%d / %d Drowned killed", tags.getInt("vertigoes.aquaticprogress"), PearlsConfig.aquaticRequirement.get())).withStyle(ChatFormatting.DARK_AQUA));
+        }
     }
 }
