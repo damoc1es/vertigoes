@@ -35,7 +35,7 @@ public class VertigoesJEIPlugin implements IModPlugin {
                         Plant life Pearl - drown in a swamp biome
                         Animal life Pearl - breed %d animals
                         Aquatic life Pearl - kill %d Drowned
-                        Death Pearl - kill %d Villagers""", PearlsConfig.animalRequirement.get(), PearlsConfig.aquaticRequirement.get(), PearlsConfig.deathRequirement.get())));
+                        Death Pearl - kill %d Villagers""", PearlsConfig.getAnimalRequirement(), PearlsConfig.getAquaticRequirement(), PearlsConfig.getDeathRequirement())));
         registry.addIngredientInfo(new ItemStack(PLANT_PEARL.get()), itemType,
                 new TextComponent("""
                         Obtained by drowning in a swamp biome with a Primal Pearl in inventory.
@@ -44,24 +44,26 @@ public class VertigoesJEIPlugin implements IModPlugin {
                 new TextComponent(String.format("""
                         Obtained by breeding %d animals with a Primal Pearl in inventory.
                         While in hotbar, you deal extra damage to undead mobs (equal to Smite IV).
-                        Turns back into a Primal Pearl if you kill a Villager or an animal.""", PearlsConfig.animalRequirement.get())));
+                        Turns back into a Primal Pearl if you kill a Villager or an animal.""", PearlsConfig.getAnimalRequirement())));
         registry.addIngredientInfo(new ItemStack(DEATH_PEARL.get()), itemType,
                 new TextComponent(String.format("""
                         Obtained by killing %d Villagers with a Primal Pearl in inventory.
                         While in main hand, undead creatures can't damage you (still take knockback).
-                        Turns back into a Primal Pearl if you cure a Zombie Villager.""", PearlsConfig.deathRequirement.get())));
+                        Turns back into a Primal Pearl if you cure a Zombie Villager.""", PearlsConfig.getDeathRequirement())));
         registry.addIngredientInfo(new ItemStack(AQUATIC_PEARL.get()), itemType,
                 new TextComponent(String.format("""
                         Obtained by killing %d Drowned with a Primal Pearl in inventory.
                         While in main hand, gain Water Breathing.
-                        Turns back into a Primal Pearl if you kill any fish/water friendly creature.""", PearlsConfig.aquaticRequirement.get())));
+                        Turns back into a Primal Pearl if you kill any fish/water friendly creature.""", PearlsConfig.getAquaticRequirement())));
         registry.addIngredientInfo(new ItemStack(PLANT_ESSENCE_ITEM.get()), itemType,
                 new TextComponent("Only obtained by using the Plant life Pearl."));
         registry.addIngredientInfo(new ItemStack(UNSTOPPABLE_FORCE.get()), itemType,
                 new TextComponent("""
                         Using it on Bedrock teleports you to The End.
                         Breaking a Beacon with it drops instead a Heart of Glass."""));
-        int n = GlassHeartConfig.glassHeartRadius.get()*2+1;
+
+        int n = GlassHeartConfig.getGlassHeartRadius()*2+1;
+
         registry.addIngredientInfo(new ItemStack(GLASS_HEART_ITEM.get()), itemType,
                 new TextComponent(String.format("""
                         In a %dx%dx%d area of effect every player receives Regeneration II. Glows and can be waterlogged.

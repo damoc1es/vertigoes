@@ -20,6 +20,8 @@ import java.util.List;
 import static dev.damocles.vertigoes.setup.Registration.DEATH_PEARL;
 
 public class DeathPearl extends AbstractElementalPearl {
+    public static final int defaultDeathRequirement = 13;
+
     public DeathPearl(Properties properties) {
         super(properties, null);
     }

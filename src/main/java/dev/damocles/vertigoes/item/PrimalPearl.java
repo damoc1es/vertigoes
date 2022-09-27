@@ -72,18 +72,18 @@ public class PrimalPearl extends Item {
     }
 
     public static void tryTransformToAnimalPearl(Player player) {
-        tryTransformToGeneralPearl(player, "vertigoes.animalprogress", PearlsConfig.animalRequirement.get(), Registration.ANIMAL_PEARL.get().getDefaultInstance());
+        tryTransformToGeneralPearl(player, "vertigoes.animalprogress", PearlsConfig.getAnimalRequirement(), Registration.ANIMAL_PEARL.get().getDefaultInstance());
     }
 
     public static void tryTransformToDeathPearl(Player player, Entity entity) {
         if(entity instanceof Villager) {
-            tryTransformToGeneralPearl(player, "vertigoes.deathprogress", PearlsConfig.deathRequirement.get(), Registration.DEATH_PEARL.get().getDefaultInstance());
+            tryTransformToGeneralPearl(player, "vertigoes.deathprogress", PearlsConfig.getDeathRequirement(), Registration.DEATH_PEARL.get().getDefaultInstance());
         }
     }
 
     public static void tryTransformToAquaticPearl(Player player, Entity entity) {
         if(entity instanceof Drowned) {
-            tryTransformToGeneralPearl(player, "vertigoes.aquaticprogress", PearlsConfig.aquaticRequirement.get(), Registration.AQUATIC_PEARL.get().getDefaultInstance());
+            tryTransformToGeneralPearl(player, "vertigoes.aquaticprogress", PearlsConfig.getAquaticRequirement(), Registration.AQUATIC_PEARL.get().getDefaultInstance());
         }
     }
 
@@ -93,13 +93,13 @@ public class PrimalPearl extends Item {
         if(stack.getTag() != null) {
             CompoundTag tags = stack.getTag();
             if(tags.contains("vertigoes.animalprogress"))
-                tooltipComponents.add(new TextComponent(String.format("%d / %d Bred animals", tags.getInt("vertigoes.animalprogress"), PearlsConfig.animalRequirement.get())).withStyle(ChatFormatting.RED));
+                tooltipComponents.add(new TextComponent(String.format("%d / %d Bred animals", tags.getInt("vertigoes.animalprogress"), PearlsConfig.getAnimalRequirement())).withStyle(ChatFormatting.RED));
 
             if(tags.contains("vertigoes.deathprogress"))
-                tooltipComponents.add(new TextComponent(String.format("%d / %d Villagers killed", tags.getInt("vertigoes.deathprogress"), PearlsConfig.deathRequirement.get())).withStyle(ChatFormatting.DARK_GRAY));
+                tooltipComponents.add(new TextComponent(String.format("%d / %d Villagers killed", tags.getInt("vertigoes.deathprogress"), PearlsConfig.getDeathRequirement())).withStyle(ChatFormatting.DARK_GRAY));
 
             if(tags.contains("vertigoes.aquaticprogress"))
-                tooltipComponents.add(new TextComponent(String.format("%d / %d Drowned killed", tags.getInt("vertigoes.aquaticprogress"), PearlsConfig.aquaticRequirement.get())).withStyle(ChatFormatting.DARK_AQUA));
+                tooltipComponents.add(new TextComponent(String.format("%d / %d Drowned killed", tags.getInt("vertigoes.aquaticprogress"), PearlsConfig.getAquaticRequirement())).withStyle(ChatFormatting.DARK_AQUA));
         }
     }
 }

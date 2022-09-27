@@ -23,6 +23,7 @@ import static net.minecraft.world.effect.MobEffects.WATER_BREATHING;
 import static net.minecraft.world.item.Items.WATER_BUCKET;
 
 public class AquaticPearl extends AbstractElementalPearl {
+    public static final int defaultAquaticRequirement = 25;
 
     public AquaticPearl(Properties properties) {
         super(properties, null);

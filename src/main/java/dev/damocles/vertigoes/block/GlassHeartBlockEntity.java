@@ -33,7 +33,7 @@ public class GlassHeartBlockEntity extends BlockEntity {
                 effectAmplifier = 1;
             }
 
-            int radius = GlassHeartConfig.glassHeartRadius.get();
+            int radius = GlassHeartConfig.getGlassHeartRadius();
 
             AABB aabb = (new AABB(pos)).inflate(radius).expandTowards(0.0D, 0.0D, 0.0D);
             List<Player> list = level.getEntitiesOfClass(Player.class, aabb);

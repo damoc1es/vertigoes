@@ -32,6 +32,7 @@ import static net.minecraft.world.item.Items.LINGERING_POTION;
 
 public class GlassHeart extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final int defaultGlassHeartRadius = 4;
 
     public GlassHeart(Properties properties) {
         super(properties);

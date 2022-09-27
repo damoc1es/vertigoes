@@ -18,6 +18,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class AnimalPearl extends AbstractElementalPearl {
+    public static final int defaultAnimalRequirement = 20;
+
     public AnimalPearl(Properties properties) {
         super(properties, null);
     }
