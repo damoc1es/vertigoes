@@ -2,7 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "##",
-    "#B"
+    "#B",
+    " C"
   ],
   "key": {
     "#": {
@@ -10,6 +11,9 @@
     },
     "B": {
       "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minecraft:wheat_seeds"
     }
   },
   "result": {
