@@ -5,7 +5,6 @@ A small Minecraft (Forge) mod adding some random things that maybe you'd like, c
 
 I recommend JEI to see in-game descriptions.
 
-<!-- Download links:
-- [CurseForge]()
-- [Modrinth]()
--->
+Download links:
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/vertigoes)
+- [Modrinth](https://modrinth.com/mod/vertigoes)
