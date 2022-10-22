@@ -6,7 +6,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Drowned;
@@ -88,18 +87,18 @@ public class PrimalPearl extends Item {
     }
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        tooltipComponents.add(new TextComponent("Immaculate").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.literal("Immaculate").withStyle(ChatFormatting.GRAY));
 
         if(stack.getTag() != null) {
             CompoundTag tags = stack.getTag();
             if(tags.contains("vertigoes.animalprogress"))
-                tooltipComponents.add(new TextComponent(String.format("%d / %d Bred animals", tags.getInt("vertigoes.animalprogress"), PearlsConfig.getAnimalRequirement())).withStyle(ChatFormatting.RED));
+                tooltipComponents.add(Component.literal(String.format("%d / %d Bred animals", tags.getInt("vertigoes.animalprogress"), PearlsConfig.getAnimalRequirement())).withStyle(ChatFormatting.RED));
 
             if(tags.contains("vertigoes.deathprogress"))
-                tooltipComponents.add(new TextComponent(String.format("%d / %d Villagers killed", tags.getInt("vertigoes.deathprogress"), PearlsConfig.getDeathRequirement())).withStyle(ChatFormatting.DARK_GRAY));
+                tooltipComponents.add(Component.literal(String.format("%d / %d Villagers killed", tags.getInt("vertigoes.deathprogress"), PearlsConfig.getDeathRequirement())).withStyle(ChatFormatting.DARK_GRAY));
 
             if(tags.contains("vertigoes.aquaticprogress"))
-                tooltipComponents.add(new TextComponent(String.format("%d / %d Drowned killed", tags.getInt("vertigoes.aquaticprogress"), PearlsConfig.getAquaticRequirement())).withStyle(ChatFormatting.DARK_AQUA));
+                tooltipComponents.add(Component.literal(String.format("%d / %d Drowned killed", tags.getInt("vertigoes.aquaticprogress"), PearlsConfig.getAquaticRequirement())).withStyle(ChatFormatting.DARK_AQUA));
         }
     }
 }

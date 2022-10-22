@@ -31,8 +31,8 @@ public class VertigoesEventHandler {
     @SubscribeEvent
     public static void onPlayerKill(LivingDeathEvent event) {
         if(event.getSource().getEntity() instanceof Player) {
-            MobCategory killedCategory = event.getEntityLiving().getType().getCategory();
-            if(event.getEntityLiving() instanceof Villager || killedCategory == MobCategory.CREATURE)
+            MobCategory killedCategory = event.getEntity().getType().getCategory();
+            if(event.getEntity() instanceof Villager || killedCategory == MobCategory.CREATURE)
                 AnimalPearl.disablePearl((Player)event.getSource().getEntity());
 
             if(killedCategory == MobCategory.WATER_CREATURE || killedCategory == MobCategory.WATER_AMBIENT)
@@ -54,7 +54,7 @@ public class VertigoesEventHandler {
     @SubscribeEvent
     public static void onPlayerCausingDamage(LivingDamageEvent event) {
         if(event.getSource().getEntity() instanceof Player) {
-            float bonus = AnimalPearl.inHotbarGetUndeadDamage((Player)event.getSource().getEntity(), event.getEntityLiving(), event.getAmount());
+            float bonus = AnimalPearl.inHotbarGetUndeadDamage((Player)event.getSource().getEntity(), event.getEntity(), event.getAmount());
             if(bonus != event.getAmount())
                 event.setAmount(bonus);
         }
@@ -62,7 +62,7 @@ public class VertigoesEventHandler {
 
     @SubscribeEvent
     public static void onPunchingWithForce(LivingKnockBackEvent event) {
-        LivingEntity damaged = event.getEntityLiving();
+        LivingEntity damaged = event.getEntity();
         if(damaged.getLastDamageSource() != null && damaged.getLastDamageSource().getEntity() instanceof LivingEntity source) {
             if(source.getMainHandItem().is(UNSTOPPABLE_FORCE.get()) && event.getStrength() < 2F) {
                 event.setStrength(2F); // equivalent of a Knockback IV enchantment
@@ -79,11 +79,11 @@ public class VertigoesEventHandler {
 
     @SubscribeEvent
     public static void onVillagersConversion(LivingConversionEvent.Post event) {
-        if (event.getEntityLiving() instanceof ZombieVillager && event.getOutcome() instanceof Villager) {
+        if (event.getEntity() instanceof ZombieVillager && event.getOutcome() instanceof Villager) {
             try {
-                UUID playerID = ObfuscationReflectionHelper.getPrivateValue(ZombieVillager.class, (ZombieVillager) event.getEntityLiving(), "conversionStarter");
+                UUID playerID = ObfuscationReflectionHelper.getPrivateValue(ZombieVillager.class, (ZombieVillager) event.getEntity(), "conversionStarter");
                 if (playerID != null) {
-                    Player player = event.getEntityLiving().getLevel().getPlayerByUUID(playerID);
+                    Player player = event.getEntity().getLevel().getPlayerByUUID(playerID);
                     if (player != null)
                         DeathPearl.disablePearl(player);
                 }

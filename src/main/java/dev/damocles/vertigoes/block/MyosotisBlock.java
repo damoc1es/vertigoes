@@ -4,7 +4,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.effect.MobEffect;
@@ -46,7 +45,7 @@ public class MyosotisBlock extends FlowerBlock {
                 itemDrop.setTag(tags);
                 popResource(level, pos, itemDrop);
             });
-            blockState.spawnAfterBreak((ServerLevel)level, pos, tool);
+            blockState.spawnAfterBreak((ServerLevel)level, pos, tool, true);
         }
     }
 
@@ -63,10 +62,10 @@ public class MyosotisBlock extends FlowerBlock {
                 if(dim.contains(":"))
                     dim = dim.substring(dim.indexOf(":")+1);
 
-                tooltip.add(new TextComponent(String.format("(x=%.2f, y=%.2f, z=%.2f) in %s", coordX, coordY, coordZ, dim)).withStyle(ChatFormatting.GRAY));
+                tooltip.add(Component.literal(String.format("(x=%.2f, y=%.2f, z=%.2f) in %s", coordX, coordY, coordZ, dim)).withStyle(ChatFormatting.GRAY));
             }
         } else {
-            tooltip.add(new TextComponent("Forget me not..").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal("Forget me not..").withStyle(ChatFormatting.GRAY));
         }
     }
 

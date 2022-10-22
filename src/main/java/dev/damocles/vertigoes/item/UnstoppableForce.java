@@ -2,7 +2,6 @@ package dev.damocles.vertigoes.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -39,12 +38,12 @@ public class UnstoppableForce extends Item {
     }
 
     @Override
-    public ItemStack getContainerItem(ItemStack stack) {
+    public ItemStack getCraftingRemainingItem(ItemStack stack) {
         return stack.copy();
     }
 
     @Override
-    public boolean hasContainerItem(ItemStack stack) {
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
         return true;
     }
 
@@ -56,7 +55,7 @@ public class UnstoppableForce extends Item {
     }
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        tooltipComponents.add(new TextComponent("What would happen if it meets the immovable object?").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.literal("What would happen if it meets the immovable object?").withStyle(ChatFormatting.GRAY));
     }
 }
 

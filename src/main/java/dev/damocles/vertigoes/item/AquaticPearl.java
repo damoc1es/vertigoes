@@ -4,7 +4,6 @@ import dev.damocles.vertigoes.datagen.PearlsConfig;
 import dev.damocles.vertigoes.setup.Registration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -53,6 +52,6 @@ public class AquaticPearl extends AbstractElementalPearl {
     }
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        tooltipComponents.add(new TextComponent("Aquatic Life").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.literal("Aquatic Life").withStyle(ChatFormatting.GRAY));
     }
 }

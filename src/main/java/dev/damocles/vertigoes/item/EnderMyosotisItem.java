@@ -3,7 +3,6 @@ package dev.damocles.vertigoes.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -35,12 +34,12 @@ public class EnderMyosotisItem extends Item {
                 if(dim.contains(":"))
                     dim = dim.substring(dim.indexOf(":")+1);
 
-                tooltipComponents.add(new TextComponent(String.format("RIGHT-CLICK to teleport to (x=%.2f, y=%.2f, z=%.2f)", coordX, coordY, coordZ)).withStyle(ChatFormatting.GRAY));
-                tooltipComponents.add(new TextComponent(String.format("IF you're in %s", dim)).withStyle(ChatFormatting.GRAY));
-                tooltipComponents.add(new TextComponent("SNEAK+RIGHT-CLICK to change coords").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.literal(String.format("RIGHT-CLICK to teleport to (x=%.2f, y=%.2f, z=%.2f)", coordX, coordY, coordZ)).withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.literal(String.format("IF you're in %s", dim)).withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.literal("SNEAK+RIGHT-CLICK to change coords").withStyle(ChatFormatting.GRAY));
             }
         } else {
-            tooltipComponents.add(new TextComponent("Forget me not..").withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.literal("Forget me not..").withStyle(ChatFormatting.GRAY));
         }
     }
 
