@@ -1,3 +1,7 @@
+> [!WARNING]  
+> Project source code & updates moved to https://git.damocles.dev/damocles/vertigoes-mod \
+> with GitHub mirror at https://github.com/damoc1es/vertigoes-mod
+
 <img src="src/main/resources/logo.png" style="width: 150px;" alt="Vertigoes myosotis logo">
 
 # Vertigoes (1.19.2 branch)
